@@ -8,7 +8,7 @@ paste /tmp/_gmlist.cmds /tmp/_gmlist.oneline
 }
 #gm commit 
 gcmt(){
- echo $@ | xargs -I _ gm commit -m '_'
+ echo $@ | xargs -I _ git commit -m '_'
 }
 #Introducing new features
 gmfeat(){
@@ -27,11 +27,11 @@ gmreview(){
 gcmt ":ok_hand: [review] $@"
 }
 #Adding logs
-gmlog+(){
+gmloga(){
 gcmt ":loud_sound: [+log] $@"
 }
 #Removing logs
-gmlog-(){
+gmlogr(){
 gcmt ":mute: [-log] $@"
 }
 
