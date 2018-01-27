@@ -1,48 +1,49 @@
+#!bash
 MY_PATH=$0
 #list cmds
-gitlist(){
-cat $MY_PATH | grep '^git\w*(' | sed 's/(.*$//' > /tmp/_gitlist.cmds
-cat $MY_PATH | grep '^git\w*(' -B 1 | grep '^#' | sed 's/^#/	--/'> /tmp/_gitlist.oneline
-paste /tmp/_gitlist.cmds /tmp/_gitlist.oneline
+gls(){
+cat "$MY_PATH" | grep '^g\w*(' | sed 's/(.*$//' > /tmp/_gmlist.cmds
+cat "$MY_PATH" | grep '^g\w*(' -B 1 | grep '^#' | sed 's/^#/	--/'> /tmp/_gmlist.oneline
+paste /tmp/_gmlist.cmds /tmp/_gmlist.oneline
 }
-#git commit 
-gitcmt(){
- echo $@ | xargs -I _ git commit -m '_'
+#gm commit 
+gcmt(){
+ echo $@ | xargs -I _ gm commit -m '_'
 }
 #Introducing new features
-gitfeat(){
-gitcmt ":sparkles: [feat] $@"
+gmfeat(){
+gcmt ":sparkles: [feat] $@"
 }
 #Fixing a bug
-gitfix(){
-gitcmt ":bug: [fixed] $@"
+gmfix(){
+gcmt ":bug: [fixed] $@"
 }
 #Moving or renaming files
-gittruck(){
-gitcmt ":truck: [rename] $@"
+gmtruck(){
+gcmt ":truck: [rename] $@"
 }
 #Updating code due to code review changes
-gitreview(){
-gitcmt ":ok_hand: [review] $@"
+gmreview(){
+gcmt ":ok_hand: [review] $@"
 }
 #Adding logs
-gitlog+(){
-gitcmt ":loud_sound: [+log] $@"
+gmlog+(){
+gcmt ":loud_sound: [+log] $@"
 }
 #Removing logs
-gitlog-(){
-gitcmt ":mute: [-log] $@"
+gmlog-(){
+gcmt ":mute: [-log] $@"
 }
 
 #Improving performance
-gitper(){
-gitcmt ":zap: [performance] $@"
+gmper(){
+gcmt ":zap: [performance] $@"
 }
 #Refactoring code
-gitrefactor(){
-gitcmt ":recycle: [refactor] $@"
+gmrefactor(){
+gcmt ":recycle: [refactor] $@"
 }
 #
-gitchore(){
-gitcmt ":tada: [chore] $@"
+gmchore(){
+gcmt ":tada: [chore] $@"
 }
