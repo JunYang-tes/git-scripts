@@ -47,3 +47,10 @@ gcmt ":recycle: [refactor] $@"
 gmchore(){
 gcmt ":tada: [chore] $@"
 }
+#git branch list local only
+gblsl(){
+  # 列出本地分支
+  git branch -r | grep -v -e '->' | sed 's:[ ]*origin/::g' > /tmp/__gitbranch.remote
+  git branch | sed 's:[* ]*::' > /tmp/__gitbranch.local
+  grep -F -v -f /tmp/__gitbranch.remote /tmp/__gitbranch.local
+}
