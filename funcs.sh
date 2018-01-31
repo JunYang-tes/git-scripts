@@ -16,7 +16,7 @@ gcmt ":sparkles: [feat] $@"
 }
 #Fixing a bug
 gmfix(){
-gcmt ":bug: [fixed] $@"
+gcmt ":bug: [fix] $@"
 }
 #Moving or renaming files
 gmtruck(){
@@ -53,4 +53,29 @@ gblsl(){
   git branch -r | grep -v -e '->' | sed 's:[ ]*origin/::g' > /tmp/__gitbranch.remote
   git branch | sed 's:[* ]*::' > /tmp/__gitbranch.local
   grep -F -v -f /tmp/__gitbranch.remote /tmp/__gitbranch.local
+}
+
+
+#remove local branch
+gbdell(){
+  gblsl | column
+  for i in $(gblsl);do
+    echo "Would you want to delete ${i}? "
+    echo -n "(Y)es / (N)o / (A)ll / (E)xit :" 
+    while read -r yes_no;do
+      case "$yes_no" in
+        Y|y) 
+          git branch -D "${i}"
+          break
+        ;;
+        N|n) break ;;
+        A|a) 
+          git branch -D $(gblsl | tr '\n' ' ')
+        return;;
+        E|e)
+          return;;
+        *);;
+      esac
+    done
+  done
 }
