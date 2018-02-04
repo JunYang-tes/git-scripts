@@ -1,5 +1,5 @@
 #!bash
-MY_PATH=$0
+MY_PATH="${HOME}/.git-script"
 #list cmds
 gls(){
   cat "$MY_PATH" | grep '^g\w*(' | sed 's/(.*$//' > /tmp/_gmlist.cmds
