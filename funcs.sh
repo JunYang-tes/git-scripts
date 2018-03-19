@@ -13,12 +13,17 @@ gls(){
 gupdate(){
   remote_version=$(curl https://raw.githubusercontent.com/OuyangQianba/git-scripts/master/funcs.sh | grep '#version')
   echo "Remote version:${remote_version}"
-  local_version=$(grep '#version' ~/.git-script)
+  local_version=$(grep '#version' "${MY_PATH}")
   echo "Local version:${local_version}"
   if [ "$local_version" != "$remote_version" ];then
     echo 'update'
     curl "https:/raw.githubusercontent.com/OuyangQianba/git-scripts/master/install.sh" | sh
   fi
+}
+#show version
+gversion(){
+  local_version=$(grep '#version' "${MY_PATH}")
+  echo $local_version
 }
 
 #help
@@ -93,6 +98,7 @@ gmrefactor(){
   gcmt ":recycle: [refactor] $@"
 }
 
+#
 gmversion() {
   gcmt ":bookmark: [version] $@"
 }
