@@ -1,10 +1,24 @@
 #!bash
+#version 1.0.0 
+
 MY_PATH="${HOME}/.git-script"
 #list cmds
 gls(){
   cat "$MY_PATH" | grep '^g\w*(' | sed 's/(.*$//' > /tmp/_gmlist.cmds
   cat "$MY_PATH" | grep '^g\w*(' -B 1 | grep '^#' | sed 's/^#/	--/'> /tmp/_gmlist.oneline
   paste /tmp/_gmlist.cmds /tmp/_gmlist.oneline
+}
+
+#update
+gupdate(){
+  remote_version=$(curl https://raw.githubusercontent.com/OuyangQianba/git-scripts/master/funcs.sh | grep '#version')
+  echo "Remote version:${remote_version}"
+  local_version=$(grep '#version' ~/.git-script)
+  echo "Local version:${local_version}"
+  if [ "$local_version" != "$remote_version" ];then
+    echo 'update'
+    curl "https:/raw.githubusercontent.com/OuyangQianba/git-scripts/master/install.sh" | sh
+  fi
 }
 
 #help
@@ -77,6 +91,15 @@ gmper(){
 #Refactoring code
 gmrefactor(){
   gcmt ":recycle: [refactor] $@"
+}
+
+gmversion() {
+  gcmt ":bookmark: [version] $@"
+}
+
+#style
+gmstyle(){
+ gcmt ":lipstick: [feat] $@"
 }
 
 #

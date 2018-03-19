@@ -1,24 +1,24 @@
 #!sh
+WRITE_RC=0
 FILE_PATH=~/.git-script
 if [ -f ${FILE_PATH} ];then
-  echo 'git-script is already exists, press enter to override it'
-  read -r
+  WRITE_RC=1
 fi
 install(){
   curl https://raw.githubusercontent.com/OuyangQianba/git-scripts/master/funcs.sh > ~/.git-script
-  rc=".bash_profile"
-  rcs=".bash_profile .bashrc .zshrc"
-  for i in ${rcs}
-  do
-    if [ -f "${HOME}/${i}" ]
-    then
-      rc=${i}
-      echo $rc
-      break;
-    fi
-  done
-  echo "RC:${rc}"
-  echo ". ~/.git-script" >> "$HOME/$rc"
+  if [ ${WRITE_RC} -eq 0 ];then
+    rc=".bash_profile"
+    rcs=".bash_profile .bashrc .zshrc"
+    for i in ${rcs}
+    do
+      if [ -f "${HOME}/${i}" ]
+      then
+        rc=${i}
+        echo "RC:${rc}"
+        echo ". ~/.git-script" >> "$HOME/$rc"
+      fi
+    done
+  fi
   echo "Git script installed. Reopen terminal or using . ~/.git-script to load script"
   echo "Using gls to show all commands"
 }
