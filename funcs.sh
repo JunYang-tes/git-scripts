@@ -1,5 +1,5 @@
 #!bash
-#version 1.0.0 
+#version 1.0.1
 
 MY_PATH="${HOME}/.git-script"
 #list cmds
@@ -11,9 +11,9 @@ gls(){
 
 #update
 gupdate(){
-  remote_version=$(curl https://raw.githubusercontent.com/OuyangQianba/git-scripts/master/funcs.sh | grep '#version')
+  remote_version=$(curl https://raw.githubusercontent.com/OuyangQianba/git-scripts/master/funcs.sh | grep '#version' | head -n 1)
   echo "Remote version:${remote_version}"
-  local_version=$(grep '#version' "${MY_PATH}")
+  local_version=$(grep '#version' "${MY_PATH}" | head -n 1)
   echo "Local version:${local_version}"
   if [ "$local_version" != "$remote_version" ];then
     echo 'update'
@@ -22,7 +22,7 @@ gupdate(){
 }
 #show version
 gversion(){
-  local_version=$(grep '#version' "${MY_PATH}")
+  local_version=$(grep '#version' "${MY_PATH}"| head -n 1)
   echo $local_version
 }
 
