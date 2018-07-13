@@ -1,5 +1,5 @@
 #!bash
-#version 1.0.1
+#version 1.1.0
 
 MY_PATH="${HOME}/.git-script"
 #list cmds
@@ -148,4 +148,10 @@ gbdell(){
       esac
     done
   done
+}
+#git un commit
+guncmt () {
+  local hash
+  hash=$(git log --oneline | head  -n 2 | tail -n 1 | awk '{print $1}')
+  git reset "$hash"
 }
