@@ -1,5 +1,5 @@
 #!bash
-#version 1.1.0
+#version 1.1.1
 
 MY_PATH="${HOME}/.git-script"
 #list cmds
@@ -96,6 +96,11 @@ gmper(){
 #Refactoring code
 gmrefactor(){
   gcmt ":recycle: [refactor] $@"
+}
+
+#Add/Update tests
+gmtest() {
+  gcmt ":white_check_mark: [test] $@"
 }
 
 #Improve UX
