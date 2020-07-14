@@ -98,6 +98,11 @@ gmrefactor(){
   gcmt ":recycle: [refactor] $@"
 }
 
+#Improve UX
+gmux(){
+  gcmt ":children_crossing: [ux] $@"
+}
+
 #
 gmversion() {
   gcmt ":bookmark: [version] $@"
